@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= produto.nome %> - Detalhes</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <%- include('partials/navbar') %> <!-- Navbar incluída aqui -->
+
+    <div class="produto">
+        <h1><%= produto.nome %></h1>
+        <p><strong>Marca:</strong> <%= produto.marca %></p>
+        <p><strong>Modelo:</strong> <%= produto.modelo %></p>
+        <p><strong>Descrição:</strong> <%= produto.descricao %></p>
+        <p><strong>Preço:</strong> <%= produto.preco %></p>
+        
+        <form action="/carrinho/adicionar" method="POST">
+            <input type="hidden" name="idProduto" value="<%= produto.idProduto %>">
+            <input type="hidden" name="idCliente" value="<%= idCliente %>">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" value="1" min="1" required>
+            <button type="submit">Adicionar ao Carrinho</button>
+        </form>
+    </div>
+
+    <script>
+        // Aqui podemos adicionar interações com o carrinho no cliente se necessário
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+    <%- include('partials/navbar') %> <!-- Navbar incluída aqui -->
+
+    <h1>Carrinho de Compras</h1>
+
+    <% if (carrinho && carrinho.length > 0) { %>
+        <ul>
+            <% carrinho.forEach((item) => { %>
+                <li>
+                    <h4><%= item.nome %></h4>
+                    <p>Preço: <%= item.preco %></p>
+                    <p>Quantidade: <%= item.quantidade %></p>
+                    <form action="/carrinho/remover" method="POST">
+                        <input type="hidden" name="idProduto" value="<%= item.idProduto %>">
+                        <input type="hidden" name="idCliente" value="<%= idCliente %>">
+                        <button type="submit">Remover</button>
+                    </form>
+                </li>
+            <% }) %>
+        </ul>
+
+        <form action="/carrinho/finalizar" method="POST">
+            <h3>Total: <%= total %></h3>
+            <label for="cep">CEP:</label>
+            <input type="text" id="cep" name="cep" required>
+            <label for="formaPagamento">Forma de Pagamento:</label>
+            <select id="formaPagamento" name="formaPagamento" required>
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="boleto">Boleto</option>
+            </select>
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    <% } else { %>
+        <p>Seu carrinho está vazio.</p>
+    <% } %>
+</body>
+</html>
